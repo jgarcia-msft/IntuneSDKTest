@@ -18,8 +18,12 @@ final class AuthenticationService: ObservableObject {
     private var msalApplication: MSALPublicClientApplication?
     private var currentAccount: MSALAccount?
     private let scopes = ["User.Read"]
+    private let enrollmentDelegate = EnrollmentDelegate()
 
     init() {
+        // The delegate receives asynchronous enrollment results from Intune.
+        // Swift imports the Objective-C status callback as enrollmentRequest(with:).
+        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
         configureMSAL()
         restoreCachedAccount()
         refreshEnrollment()
@@ -169,6 +173,20 @@ final class AuthenticationService: ObservableObject {
     private enum ConfigurationError: LocalizedError {
         case invalidAuthority
         var errorDescription: String? { "The configured authority URL is invalid." }
+    }
+}
+
+private final class EnrollmentDelegate: NSObject, IntuneMAMEnrollmentDelegate {
+    func enrollmentRequest(with status: IntuneMAMEnrollmentStatus) {
+        print("Intune enrollment status: \(status.statusCode) - \(status.errorString ?? \"none\")")
+    }
+
+    func policyRequest(with status: IntuneMAMEnrollmentStatus) {
+        print("Intune policy status: \(status.statusCode) - \(status.errorString ?? \"none\")")
+    }
+
+    func unenrollRequest(with status: IntuneMAMEnrollmentStatus) {
+        print("Intune unenrollment status: \(status.statusCode) - \(status.errorString ?? \"none\")")
     }
 }
 
