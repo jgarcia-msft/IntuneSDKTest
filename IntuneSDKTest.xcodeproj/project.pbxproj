@@ -1,0 +1,106 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000001 /* IntuneSDKTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* IntuneSDKTestApp.swift */; };
+		A10000000000000000000003 /* NotesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* NotesStore.swift */; };
+		A10000000000000000000004 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* RootView.swift */; };
+		A10000000000000000000008 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000008 /* AuthenticationService.swift */; };
+		A10000000000000000000009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000009 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A90000000000000000000003 /* MSAL */ = {isa = XCSwiftPackageProductDependency; package = A90000000000000000000001 /* MSAL */; productName = MSAL; };
+		A90000000000000000000004 /* IntuneMAMSwift */ = {isa = XCSwiftPackageProductDependency; package = A90000000000000000000002 /* IntuneMAM */; productName = IntuneMAMSwift; };
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin PBXFileReference section */
+		A20000000000000000000001 /* IntuneSDKTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntuneSDKTestApp.swift; sourceTree = "<group>"; };
+		A20000000000000000000003 /* NotesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStore.swift; sourceTree = "<group>"; };
+		A20000000000000000000004 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		A20000000000000000000005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000000000000000000006 /* IntuneSDKTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IntuneSDKTest.entitlements; sourceTree = "<group>"; };
+		A20000000000000000000007 /* IntuneSDKTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntuneSDKTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000000000000000000008 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		A20000000000000000000009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A90000000000000000000001 /* MSAL */ = {isa = XCRemoteSwiftPackageReference; repositoryURL = "https://github.com/AzureAD/microsoft-authentication-library-for-objc"; requirement = {kind = upToNextMajorVersion; minimumVersion = 2.15.0; }; };
+		A90000000000000000000002 /* IntuneMAM */ = {isa = XCRemoteSwiftPackageReference; repositoryURL = "https://github.com/microsoftconnect/ms-intune-app-sdk-ios"; requirement = {kind = upToNextMajorVersion; minimumVersion = 21.7.1; }; };
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ( );
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50000000000000000000001 = {isa = PBXGroup; children = ( A50000000000000000000002 /* IntuneSDKTest */, A50000000000000000000003 /* Products */, ); sourceTree = "<group>"; };
+		A50000000000000000000002 /* IntuneSDKTest */ = {isa = PBXGroup; children = ( A20000000000000000000001, A20000000000000000000003, A20000000000000000000004, A20000000000000000000005, A20000000000000000000006, A20000000000000000000008, A20000000000000000000009, ); path = .; sourceTree = "<group>"; };
+		A50000000000000000000003 /* Products */ = {isa = PBXGroup; children = ( A20000000000000000000007 /* IntuneSDKTest.app */, ); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A60000000000000000000001 /* IntuneSDKTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A70000000000000000000002 /* Build configuration list for PBXNativeTarget "IntuneSDKTest" */;
+			buildPhases = ( A40000000000000000000002 /* Sources */, A40000000000000000000001 /* Frameworks */, A40000000000000000000003 /* Resources */, );
+			dependencies = ();
+			name = IntuneSDKTest;
+			packageProductDependencies = ( A90000000000000000000003, A90000000000000000000004, );
+			productName = IntuneSDKTest;
+			productReference = A20000000000000000000007 /* IntuneSDKTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A80000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = { LastUpgradeCheck = 1600; TargetAttributes = { A60000000000000000000001 = { CreatedOnToolsVersion = 16.0; }; }; };
+			buildConfigurationList = A70000000000000000000001 /* Build configuration list for PBXProject "IntuneSDKTest" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			knownRegions = ( en, Base, );
+			mainGroup = A50000000000000000000001;
+			packageReferences = ( A90000000000000000000001, A90000000000000000000002, );
+			productRefGroup = A50000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = ( A60000000000000000000001 /* IntuneSDKTest */, );
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A40000000000000000000003 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = ( A10000000000000000000009 /* Assets.xcassets in Resources */, ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A40000000000000000000002 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = ( A10000000000000000000001, A10000000000000000000003, A10000000000000000000004, A10000000000000000000008, ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A70000000000000000000003 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CLANG_ENABLE_MODULES = YES; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_BITCODE = NO; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"; PRODUCT_BUNDLE_IDENTIFIER = com.example.IntuneSDKTest; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; CODE_SIGN_ENTITLEMENTS = IntuneSDKTest.entitlements; STRIP_SWIFT_SYMBOLS = NO; }; name = Debug; };
+		A70000000000000000000004 /* Release */ = {isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CLANG_ENABLE_MODULES = YES; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_BITCODE = NO; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"; PRODUCT_BUNDLE_IDENTIFIER = com.example.IntuneSDKTest; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; CODE_SIGN_ENTITLEMENTS = IntuneSDKTest.entitlements; STRIP_SWIFT_SYMBOLS = NO; }; name = Release; };
+		A70000000000000000000005 /* Debug target */ = {isa = XCBuildConfiguration; buildSettings = { SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug; };
+		A70000000000000000000006 /* Release target */ = {isa = XCBuildConfiguration; buildSettings = { SWIFT_OPTIMIZATION_LEVEL = "-O"; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A70000000000000000000001 /* Build configuration list for PBXProject "IntuneNotes" */ = {isa = XCConfigurationList; buildConfigurations = ( A70000000000000000000003, A70000000000000000000004, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A70000000000000000000002 /* Build configuration list for PBXNativeTarget "IntuneNotes" */ = {isa = XCConfigurationList; buildConfigurations = ( A70000000000000000000005, A70000000000000000000006, ); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+
+	};
+	rootObject = A80000000000000000000001 /* Project object */;
+}
