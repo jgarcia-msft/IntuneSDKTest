@@ -1,5 +1,6 @@
 import IntuneMAMSwift
 import MSAL
+import OSLog
 import SwiftUI
 import UIKit
 
@@ -177,16 +178,21 @@ final class AuthenticationService: ObservableObject {
 }
 
 private final class EnrollmentDelegate: NSObject, IntuneMAMEnrollmentDelegate {
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "IntuneSDKTest",
+        category: "IntuneMAM"
+    )
+
     func enrollmentRequest(with status: IntuneMAMEnrollmentStatus) {
-        print("Intune enrollment status: \(status.statusCode) - \(status.errorString ?? "none")")
+        logger.info("Enrollment status: \(status.statusCode), error: \(status.errorString ?? "none", privacy: .public)")
     }
 
     func policyRequest(with status: IntuneMAMEnrollmentStatus) {
-        print("Intune policy status: \(status.statusCode) - \(status.errorString ?? "none")")
+        logger.info("Policy status: \(status.statusCode), error: \(status.errorString ?? "none", privacy: .public)")
     }
 
     func unenrollRequest(with status: IntuneMAMEnrollmentStatus) {
-        print("Intune unenrollment status: \(status.statusCode) - \(status.errorString ?? "none")")
+        logger.info("Unenrollment status: \(status.statusCode), error: \(status.errorString ?? "none", privacy: .public)")
     }
 }
 
