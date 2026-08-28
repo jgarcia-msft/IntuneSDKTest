@@ -4,6 +4,8 @@
 <dict>
     <key>CFBundleDisplayName</key>
     <string>IntuneSDKTest</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleName</key>
@@ -65,9 +67,9 @@
         <key>ADALRedirectUri</key>
         <string>msauth.$(PRODUCT_BUNDLE_IDENTIFIER)://auth</string>
         <key>AutoEnrollOnLaunch</key>
-        <false/>
+        <true/>
         <key>MAMPolicyRequired</key>
-        <false/>
+        <true/>
         <key>MultiIdentity</key>
         <false/>
         <key>VerboseLoggingEnabled</key>
