@@ -178,15 +178,15 @@ final class AuthenticationService: ObservableObject {
 
 private final class EnrollmentDelegate: NSObject, IntuneMAMEnrollmentDelegate {
     func enrollmentRequest(with status: IntuneMAMEnrollmentStatus) {
-        print("Intune enrollment status: \(status.statusCode) - \(status.errorString ?? \"none\")")
+        print("Intune enrollment status: \(status.statusCode) - \(status.errorString ?? "none")")
     }
 
     func policyRequest(with status: IntuneMAMEnrollmentStatus) {
-        print("Intune policy status: \(status.statusCode) - \(status.errorString ?? \"none\")")
+        print("Intune policy status: \(status.statusCode) - \(status.errorString ?? "none")")
     }
 
     func unenrollRequest(with status: IntuneMAMEnrollmentStatus) {
-        print("Intune unenrollment status: \(status.statusCode) - \(status.errorString ?? \"none\")")
+        print("Intune unenrollment status: \(status.statusCode) - \(status.errorString ?? "none")")
     }
 }
 
