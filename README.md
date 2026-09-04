@@ -1,6 +1,6 @@
 # IntuneSDKTest
 
-A small Apple Notes-style SwiftUI app for learning how to integrate the Microsoft Authentication Library (MSAL) and Microsoft Intune App SDK for iOS.
+A small Note taking SwiftUI app. The purpose for creating this app was 1. To learning how to integrate the Microsoft Authentication Library (MSAL) and Microsoft Intune App SDK for iOS, 2. To give Intune support engineers a reference on how these two libraries are used in an app, and 3. If someone has the requirements to compile the app they can use it as a test app. (Requirments are an Apple developer certificate to sign the app, and a MacBook that runs xcode).
 
 ## What is included
 
