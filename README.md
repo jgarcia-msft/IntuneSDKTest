@@ -9,6 +9,7 @@ A small Note taking SwiftUI app. The purpose for creating this app was 1. To lea
 - MSAL broker callback handling for Microsoft Authenticator.
 - Intune MAM enrollment after MSAL sign-in.
 - In-app Intune diagnostic console for collecting SDK logs during testing.
+- Optional Settings app toggle to show the Intune diagnostic console when the app launches.
 - Account screen showing the current Intune enrollment state.
 - Ordered Intune deregistration, selective wipe, and MSAL sign-out.
 - Local JSON persistence using iOS file protection.
@@ -47,7 +48,8 @@ Use a physical iPhone or iPad for broker and Intune policy testing. The Intune S
 4. Require an app PIN for an obvious first policy test.
 5. Sign in to the app, wait for enrollment, and open **Account** to refresh the status.
 6. Open **Account > Open diagnostic console** to review and share Intune logs when troubleshooting.
-7. Create, edit, delete, and sign out to exercise the complete sample flow.
+7. To open the console automatically when the app launches, enable **Settings > IntuneSDKTest > Show Intune diagnostics on launch**.
+8. Create, edit, delete, and sign out to exercise the complete sample flow.
 
 ## Important files
 

@@ -18,10 +18,12 @@ final class AuthenticationService: ObservableObject {
 
     private var msalApplication: MSALPublicClientApplication?
     private var currentAccount: MSALAccount?
+    private var didCheckLaunchDiagnostics = false
     private let scopes = ["User.Read"]
     private let enrollmentDelegate = EnrollmentDelegate()
 
     init() {
+        UserDefaults.standard.register(defaults: [Settings.showDiagnosticsOnLaunch: false])
         // The delegate receives asynchronous enrollment results from Intune.
         // Swift imports the Objective-C status callback as enrollmentRequest(with:).
         IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
@@ -123,6 +125,16 @@ final class AuthenticationService: ObservableObject {
         IntuneMAMDiagnosticConsole.display()
     }
 
+    func showLaunchDiagnosticsIfEnabled() {
+        guard !didCheckLaunchDiagnostics else { return }
+        didCheckLaunchDiagnostics = true
+        guard UserDefaults.standard.bool(forKey: Settings.showDiagnosticsOnLaunch) else { return }
+
+        DispatchQueue.main.async { [weak self] in
+            self?.showIntuneDiagnosticConsole()
+        }
+    }
+
     private func configureMSAL() {
         guard let settings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [String: Any],
               let clientID = settings["ADALClientId"] as? String,
@@ -178,6 +190,10 @@ final class AuthenticationService: ObservableObject {
     private enum ConfigurationError: LocalizedError {
         case invalidAuthority
         var errorDescription: String? { "The configured authority URL is invalid." }
+    }
+
+    private enum Settings {
+        static let showDiagnosticsOnLaunch = "ShowIntuneDiagnosticsOnLaunch"
     }
 }
 

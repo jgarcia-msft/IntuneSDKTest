@@ -13,6 +13,9 @@ struct RootView: View {
         case let .signedIn(username, accountID):
             NotesHomeView(username: username, accountID: accountID)
         }
+        .onAppear {
+            authService.showLaunchDiagnosticsIfEnabled()
+        }
     }
 }
 
