@@ -48,7 +48,7 @@ Use a physical iPhone or iPad for broker and Intune policy testing. The Intune S
 4. Require an app PIN for an obvious first policy test.
 5. Sign in to the app, wait for enrollment, and open **Account** to refresh the status.
 6. Open **Account > Open diagnostic console** to review and share Intune logs when troubleshooting.
-7. To open the console automatically when the app launches, enable **Settings > IntuneSDKTest > Show Intune diagnostics on launch**.
+7. To open the console automatically when the app launches, enable **Settings > IntuneSDKTest > Show Intune diagnostics on launch**. Note, this will only work when signed out of app.
 8. Create, edit, delete, and sign out to exercise the complete sample flow.
 
 ## Important files
