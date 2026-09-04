@@ -188,15 +188,15 @@ private final class EnrollmentDelegate: NSObject, IntuneMAMEnrollmentDelegate {
     )
 
     func enrollmentRequest(with status: IntuneMAMEnrollmentStatus) {
-        logger.info("Enrollment status: \(status.statusCode), error: \(status.errorString ?? "none", privacy: .public)")
+        logger.info("Enrollment status: \(String(describing: status.statusCode)), error: \(status.errorString ?? "none", privacy: .public)")
     }
 
     func policyRequest(with status: IntuneMAMEnrollmentStatus) {
-        logger.info("Policy status: \(status.statusCode), error: \(status.errorString ?? "none", privacy: .public)")
+        logger.info("Policy status: \(String(describing: status.statusCode)), error: \(status.errorString ?? "none", privacy: .public)")
     }
 
     func unenrollRequest(with status: IntuneMAMEnrollmentStatus) {
-        logger.info("Unenrollment status: \(status.statusCode), error: \(status.errorString ?? "none", privacy: .public)")
+        logger.info("Unenrollment status: \(String(describing: status.statusCode)), error: \(status.errorString ?? "none", privacy: .public)")
     }
 }
 
