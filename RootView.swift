@@ -5,13 +5,15 @@ struct RootView: View {
     @EnvironmentObject private var authService: AuthenticationService
 
     var body: some View {
-        switch authService.state {
-        case .signedOut, .failed:
-            SignInView()
-        case .signingIn:
-            ProgressView("Signing in with Microsoft...")
-        case let .signedIn(username, accountID):
-            NotesHomeView(username: username, accountID: accountID)
+        Group {
+            switch authService.state {
+            case .signedOut, .failed:
+                SignInView()
+            case .signingIn:
+                ProgressView("Signing in with Microsoft...")
+            case let .signedIn(username, accountID):
+                NotesHomeView(username: username, accountID: accountID)
+            }
         }
         .onAppear {
             authService.showLaunchDiagnosticsIfEnabled()
