@@ -60,88 +60,44 @@ Use a physical iPhone or iPad for broker and Intune policy testing. The Intune S
 
 The following diagram explains the end-to-end sequence in this sample app. It is useful for support engineers and for anyone learning why a sign-in, enrollment, or sign-out issue happens.
 
-```text
-+-------------------+        +------------------------------+        +---------------------------+
-| 1. App launches   | ---->  | AuthenticationService.init() | ---->  | configureMSAL() reads      |
-|                   |        |                              |        | Info.plist + creates       |
-|                   |        |                              |        | MSALPublicClientApplication |
-+-------------------+        +------------------------------+        +---------------------------+
-                                                                                  |
-                                                                                  v
-                                                                 +--------------------------+
-                                                                 | User taps Sign In        |
-                                                                 +--------------------------+
-                                                                                  |
-                                                                                  v
-                                                                 +--------------------------+
-                                                                 | AuthenticationService    |
-                                                                 | .signIn()                |
-                                                                 | - MSALWebviewParameters  |
-                                                                 | - acquireToken()         |
-                                                                 +--------------------------+
-                                                                                  |
-                                                                                  v
-                                                   +-----------------------------------------------+
-                                                   | MSAL browser / Microsoft Authenticator UI      |
-                                                   | User authenticates and grants consent           |
-                                                   +-----------------------------------------------+
-                                                                                  |
-                                                                                  v
-                                                                 +--------------------------+
-                                                                 | Redirect returns to app  |
-                                                                 +--------------------------+
-                                                                                  |
-                                                                                  v
-                                                      +----------------------------------------------+
-                                                      | SceneDelegate.scene(_:openURLContexts:)      |
-                                                      | MSALPublicClientApplication.handleMSALResponse |
-                                                      +----------------------------------------------+
-                                                                                  |
-                                                                                  v
-                                             +------------------------------------------------------------+
-                                             | MSAL returns result.account + tenantProfile.identifier     |
-                                             +------------------------------------------------------------+
-                                                                                  |
-                                                                                  v
-                                                                  +---------------------------+
-                                                                  | registerWithIntune()      |
-                                                                  | IntuneMAMEnrollmentManager|
-                                                                  | .registerAndEnrollAccountId |
-                                                                  +---------------------------+
-                                                                                  |
-                                                                                  v
-                                                      +----------------------------------------------+
-                                                      | Intune MAM enrollment + policy evaluation     |
-                                                      | App receives async enrollment / policy status |
-                                                      +----------------------------------------------+
-                                                                                  |
-                                                                                  v
-                                                   +-----------------------------------------------+
-                                                   | EnrollmentDelegate logs status              |
-                                                   | - enrollmentRequest(with:)                  |
-                                                   | - policyRequest(with:)                      |
-                                                   | - unenrollRequest(with:)                    |
-                                                   +-----------------------------------------------+
-                                                                                  |
-                                                                                  v
-                                                     +-------------------------------------+
-                                                     | App refreshes enrollment state      |
-                                                     | and shows current Intune status     |
-                                                     +-------------------------------------+
+```mermaid
+sequenceDiagram
+   autonumber
+   participant App
+   participant Auth as AuthenticationService
+   participant MSAL as MSALPublicClientApplication
+   participant AuthUI as Browser / Microsoft Authenticator
+   participant Scene as SceneDelegate
+   participant Intune as IntuneMAMEnrollmentManager
+   participant Delegate as EnrollmentDelegate
 
+   App->>Auth: init()
+   Auth->>Auth: configureMSAL()
+   Auth->>Auth: Read IntuneMAMSettings from Info.plist
+   Auth->>MSAL: Create public client application
 
-+---------------------+        +-------------------------------------------+        +------------------------------+
-| User chooses Sign  | ----> | AuthenticationService.signOut()            | ----> | Intune deregistration first  |
-| Out                |        | - deRegisterAndUnenrollAccountId()        |        | withWipe: true               |
-+---------------------+        | - delete local data                       |        +------------------------------+
-                             | - MSAL signout(currentAccount)            |
-                             +-------------------------------------------+
-                                                          |
-                                                          v
-                                              +------------------------------+
-                                              | App state cleared and user  |
-                                              | returns to signed-out        |
-                                              +------------------------------+
+   App->>Auth: signIn()
+   Auth->>MSAL: acquireToken(with: MSALInteractiveTokenParameters)
+   MSAL->>AuthUI: Open interactive sign-in
+   AuthUI-->>Scene: Redirect to app
+   Scene->>MSAL: handleMSALResponse(...)
+   MSAL-->>Auth: Result with account and tenantProfile.identifier
+
+   Auth->>Intune: registerAndEnrollAccountId(accountID)
+   Intune-->>Delegate: enrollmentRequest(with:)
+   Intune-->>Delegate: policyRequest(with:)
+   Delegate-->>Auth: Log enrollment and policy status
+   Auth->>Intune: enrolledAccountId()
+   Intune-->>App: Refresh and display enrollment state
+
+   opt User chooses Sign Out
+      App->>Auth: signOut(deleteLocalData:)
+      Auth->>Intune: deRegisterAndUnenrollAccountId(accountID, withWipe: true)
+      Intune-->>Delegate: unenrollRequest(with:)
+      Auth->>Auth: Delete local data
+      Auth->>MSAL: signout(currentAccount)
+      MSAL-->>App: Signed-out state
+   end
 ```
 
 ### What code accomplishes each step
