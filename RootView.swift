@@ -166,6 +166,9 @@ private struct AccountView: View {
                     Button("Refresh enrollment", systemImage: "arrow.clockwise") {
                         authService.refreshEnrollment()
                     }
+                    Button("Open diagnostic console", systemImage: "ladybug") {
+                        authService.showIntuneDiagnosticConsole()
+                    }
                 }
                 Section {
                     Button("Sign Out", role: .destructive) {

@@ -119,6 +119,10 @@ final class AuthenticationService: ObservableObject {
         enrollmentID = IntuneMAMEnrollmentManager.instance().enrolledAccountId()
     }
 
+    func showIntuneDiagnosticConsole() {
+        IntuneMAMDiagnosticConsole.display()
+    }
+
     private func configureMSAL() {
         guard let settings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [String: Any],
               let clientID = settings["ADALClientId"] as? String,

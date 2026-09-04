@@ -8,6 +8,7 @@ A small Apple Notes-style SwiftUI app for learning how to integrate the Microsof
 - MSAL interactive sign-in with `User.Read`.
 - MSAL broker callback handling for Microsoft Authenticator.
 - Intune MAM enrollment after MSAL sign-in.
+- In-app Intune diagnostic console for collecting SDK logs during testing.
 - Account screen showing the current Intune enrollment state.
 - Ordered Intune deregistration, selective wipe, and MSAL sign-out.
 - Local JSON persistence using iOS file protection.
@@ -45,11 +46,12 @@ Use a physical iPhone or iPad for broker and Intune policy testing. The Intune S
 3. Assign the policy to the test user.
 4. Require an app PIN for an obvious first policy test.
 5. Sign in to the app, wait for enrollment, and open **Account** to refresh the status.
-6. Create, edit, delete, and sign out to exercise the complete sample flow.
+6. Open **Account > Open diagnostic console** to review and share Intune logs when troubleshooting.
+7. Create, edit, delete, and sign out to exercise the complete sample flow.
 
 ## Important files
 
-- `AuthenticationService.swift`: MSAL setup, token acquisition, Intune enrollment, and sign-out ordering.
+- `AuthenticationService.swift`: MSAL setup, token acquisition, Intune enrollment, diagnostic console, and sign-out ordering.
 - `SceneDelegate.swift`: required MSAL redirect callback and SwiftUI scene bridge.
 - `Info.plist`: redirect URL, broker schemes, and `IntuneMAMSettings`.
 - `IntuneSDKTest.entitlements`: MSAL and Intune shared keychain groups.
@@ -143,6 +145,6 @@ sequenceDiagram
 - If sign-in completes but Intune never enrolls: verify the app registration and the user has the correct Intune policy assigned.
 - If the redirect does not come back to the app: confirm `SceneDelegate` is present and `handleMSALResponse` is wired correctly.
 - If sign-out fails: check whether `deRegisterAndUnenrollAccountId` is called before MSAL sign-out and whether the account is still available in cache.
-- If policies are not applied: inspect the Intune enrollment delegate logs and the `enrolledAccountId()` status from the Account screen.
+- If policies are not applied: inspect the Intune enrollment delegate logs, open the Account screen's diagnostic console, and check the `enrolledAccountId()` status.
 
 This is a learning sample, not a production-ready managed-data implementation. Production apps should add Intune enrollment/policy delegates, selective-wipe handling for every corporate data store, Conditional Access remediation, accessibility tests, and the current Intune iOS integration checklist. Set `VerboseLoggingEnabled` to `false` before shipping.
